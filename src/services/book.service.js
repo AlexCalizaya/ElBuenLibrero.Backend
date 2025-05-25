@@ -26,7 +26,7 @@ class BookService {
     }
 
     async deleteBook(id) {
-        const deletedRows = await UserRepository.deleteUser(id);
+        const deletedRows = await BookRepository.deleteBook(id);
         if (deletedRows === 0) {
             throw new Error(`Libro no encontrado con id ${id}`);
         }
