@@ -23,6 +23,20 @@ class BookRepository {
         return result.rows;
     }
 
+    async getBookByISBN(isbn) {
+        const sql = `SELECT * FROM books WHERE isbn ILIKE $1`;
+        const result = await pool.query(sql, [`${isbn}%`]);
+        return result.rows;
+    }
+
+
+    async getBookByName(name) {
+        const sql = `SELECT * FROM books WHERE name ILIKE $1`;
+        const result = await pool.query(sql, [`%${name}%`]);
+        return result.rows;
+    }
+
+
     async createBook(book) {
         const sql = `INSERT INTO books (isbn, name, stock, price, image) VALUES ($1, $2, $3, $4, $5) RETURNING *`;
         const result = await pool.query(sql, [book.isbn, book.name, book.stock, book.price, book.image]);

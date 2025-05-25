@@ -18,6 +18,24 @@ export const getBookById = async (req, res) => {
     }
 }
 
+export const getBookByISBN = async (req, res) => {
+    try {
+        const book = await BookService.getBookByISBN(req.query.isbn);
+        res.json(book);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al obtener el libro: ' + error.message });
+    }
+}
+
+export const getBookByName = async (req, res) => {
+    try {
+        const book = await BookService.getBookByName(req.query.name);
+        res.json(book);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al obtener el libro: ' + error.message });
+    }
+}
+
 export const createBook = async (req, res) => {
     try {
         const book = await BookService.createBook(req.body);
