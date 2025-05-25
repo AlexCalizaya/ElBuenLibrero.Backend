@@ -19,6 +19,29 @@ class DetailRepository {
         return result.rows[0];
     }
 
+    async createMultipleDetails(details) {
+        if (!details.length) return [];
+
+        const values = [];
+        const placeholders = [];
+
+        details.forEach((detail, index) => {
+            const offset = index * 4;
+            placeholders.push(`($${offset + 1}, $${offset + 2}, $${offset + 3}, $${offset + 4})`);
+            values.push(detail.order_id, detail.book_id, detail.price, detail.quantity);
+        });
+
+        const sql = `
+            INSERT INTO details (order_id, book_id, price, quantity)
+            VALUES ${placeholders.join(', ')}
+            RETURNING *
+        `;
+
+        const result = await pool.query(sql, values);
+        return result.rows;
+    }
+
+
     async updateDetail(id, detail) {
         const sql = `UPDATE details SET name = $1, email = $2, phone = $3, address = $4, notes = $5 WHERE id = $6 RETURNING *`;
         const result = await pool.query(sql, [detail.name, detail.email, detail.phone, detail.address, detail.notes, id]);

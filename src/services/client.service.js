@@ -9,6 +9,10 @@ class ClientService {
         return await ClientRepository.getClientById(id);
     }
 
+    async getClientByDocNumber(docNumber) {
+        return await ClientRepository.getClientByDocNumber(docNumber);
+    }
+
     async createClient(client) {
         return await ClientRepository.createClient(client);
     }

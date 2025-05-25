@@ -5,9 +5,9 @@ const router = Router();
 
 // Details
 router.get('/', getDetails);
-router.get('/:id', getDetailById);
+router.get('/getById', getDetailById);
 router.post('/', createDetail);
-router.put('/:id', updateDetail);
-router.delete('/:id', deleteDetail);
+router.put('/', updateDetail);
+router.delete('/', deleteDetail);
 
 export default router;

@@ -11,7 +11,7 @@ export const getBooks = async (_, res) => {
 
 export const getBookById = async (req, res) => {
     try {
-        const book = await BookService.getBookById(req.params.id);
+        const book = await BookService.getBookById(req.query.id);
         res.json(book);
     } catch (error) {
         res.status(500).json({ message: 'Error al obtener el libro: ' + error.message });
@@ -29,7 +29,7 @@ export const createBook = async (req, res) => {
 
 export const updateBook = async (req, res) => {
     try {
-        const book = await BookService.updateBook(req.params.id, req.body);
+        const book = await BookService.updateBook(req.query.id, req.body);
         res.json(book);
     } catch (error) {
         res.status(500).json({ message: 'Error al actualizar el libro: ' + error.message });
@@ -38,7 +38,7 @@ export const updateBook = async (req, res) => {
 
 export const deleteBook = async (req, res) => {
     try {
-        const result = await BookService.deleteBook(req.params.id);
+        const result = await BookService.deleteBook(req.query.id);
         res.status(200).json(result);
     } catch (error) {
         res.status(500).json({ message: 'Error al eliminar el libro: ' + error.message });

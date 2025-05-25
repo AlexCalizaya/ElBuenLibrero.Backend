@@ -11,7 +11,7 @@ export const getOrders = async (_, res) => {
 
 export const getOrderById = async (req, res) => {
     try {
-        const order = await OrderService.getOrderById(req.params.id);
+        const order = await OrderService.getOrderById(req.query.id);
         res.json(order);
     } catch (error) {
         res.status(500).json({ message: 'Error al obtener la orden: ' + error.message });
@@ -29,7 +29,7 @@ export const createOrder = async (req, res) => {
 
 export const updateOrder = async (req, res) => {
     try {
-        const order = await OrderService.updateOrder(req.params.id, req.body);
+        const order = await OrderService.updateOrder(req.query.id, req.body);
         res.json(order);
     } catch (error) {
         res.status(500).json({ message: 'Error al actualizar la orden: ' + error.message });
@@ -38,9 +38,18 @@ export const updateOrder = async (req, res) => {
 
 export const deleteOrder = async (req, res) => {
     try {
-        const order = await OrderService.deleteOrder(req.params.id);
+        const order = await OrderService.deleteOrder(req.query.id);
         res.json(order);
     } catch (error) {
         res.status(500).json({ message: 'Error al eliminar la orden: ' + error.message });
+    }
+}
+
+export const finishPurchase = async (req, res) => {
+    try {
+        const order = await OrderService.finishPurchase(req.body);
+        res.json(order);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al finalizar la compra: ' + error.message });
     }
 }

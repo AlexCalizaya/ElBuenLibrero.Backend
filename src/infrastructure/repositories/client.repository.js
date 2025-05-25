@@ -13,6 +13,12 @@ class ClientRepository {
         return result.rows[0];
     }
 
+    async getClientByDocNumber(docNumber) {
+        const sql = `SELECT * FROM clients WHERE doc_number = $1`;
+        const result = await pool.query(sql, [docNumber]);
+        return result.rows[0];
+    }
+
     async createClient(client) {
         const sql = `INSERT INTO clients (doc_type, doc_number, first_name, last_name, phone, email) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
         const result = await pool.query(sql, [client.doc_type, client.doc_number, client.first_name, client.last_name, client.phone, client.email]);

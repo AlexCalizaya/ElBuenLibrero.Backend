@@ -5,9 +5,9 @@ const router = Router();
 
 // Books
 router.get('/', getBooks);
-router.get('/:id', getBookById);
+router.get('/getById', getBookById);
 router.post('/', createBook);
-router.put('/:id', updateBook);
-router.delete('/:id', deleteBook);
+router.put('/', updateBook);
+router.delete('/', deleteBook);
 
 export default router;
